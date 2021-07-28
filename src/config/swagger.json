@@ -1,0 +1,75 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Singu Fake Back-end Documentation",
+    "description": "This is SINGU fake API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "gabrielbarth.dev@gmail.com"
+    }
+  },
+  "paths": {
+    "/services": {
+      "post": {
+        "tags": ["Service"],
+        "summary": "Create a beauty service",
+        "description": "Create a new beauty service",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "description": "beauty service name sample",
+                  "category": "beauty service category name sample"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Service already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Service"],
+        "summary": "List beauty services",
+        "description": "List all beauty services",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
