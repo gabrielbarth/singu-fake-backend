@@ -1,13 +1,12 @@
-import { Service } from "../../model/Service";
+import { IService } from "../../schemas/Service";
 import { ICreateServiceDTO } from '../../dtos/ICreateServiceDTO';
 
 interface IServicesRepository {
-
-  create({ description, category } : ICreateServiceDTO) : void;
-
-  findByDescription(description: string): Service;
-
-  list() : Service[];
+  create({ description, category } : ICreateServiceDTO) : Promise<IService>;
+  findByDescription(description: string) : Promise<IService>;
+  listByCategory(category: string): Promise<IService[]>
+  list() :  Promise<IService[]>;
+  delete(id: string) : Promise<boolean>;
 }
 
 export { IServicesRepository };

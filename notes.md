@@ -25,5 +25,5 @@
  * user_id - int
  * creation_date
  * appointment_date - date
- * cancel_Date - date
+ * cancel_date - date
  * status - string

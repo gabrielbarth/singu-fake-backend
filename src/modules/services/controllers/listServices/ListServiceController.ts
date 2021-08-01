@@ -1,17 +1,16 @@
 import { Request, Response } from 'express';
 
-import { ListServiceService } from '../../services/ListServiceService';
+import { IListServiceService } from '../../services/interfaces/IListServiceService';
 
 class ListServiceController {
-  private listServiceService: ListServiceService;
+  private listServiceService: IListServiceService;
 
-  constructor(createServiceService: ListServiceService) {
-
+  constructor(createServiceService: IListServiceService) {
     this.listServiceService = createServiceService;
   }
-  
-  handle(request: Request, response: Response): Response {
-    const all = this.listServiceService.execute();
+
+  async handle(request: Request, response: Response): Promise<Response> {
+    const all = await this.listServiceService.execute();
     return response.json(all);
   }
 

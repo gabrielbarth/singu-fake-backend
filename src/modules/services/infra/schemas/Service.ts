@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from 'uuid';
 import { mongoose } from '../../../../config/databaseConnection';
 
-interface Service extends mongoose.Document {
+interface IService extends mongoose.Document {
   description: string;
   category: string;
 }
@@ -22,6 +22,6 @@ const ServiceSchema: mongoose.Schema = new mongoose.Schema({
 
 });
 
-const Service = mongoose.model<Service>('Service', ServiceSchema);
+const ServiceModel = mongoose.model<IService>('Service', ServiceSchema);
 
-export { Service };
+export { IService, ServiceModel };

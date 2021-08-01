@@ -1,21 +1,23 @@
 import { Request, Response } from 'express';
 
-import { CreateServiceService } from '../../services/CreateServiceService';
+import { ICreateServiceService } from '../../services/interfaces/ICreateServiceService';
 
 class CreateServiceController {
-  private createServiceService: CreateServiceService;
+  private createServiceService: ICreateServiceService;
 
-  constructor(createServiceService: CreateServiceService) {
-
+  constructor(createServiceService: ICreateServiceService) {
     this.createServiceService = createServiceService;
   }
-  
-  handle(request: Request, response: Response): Response {
+
+  async handle(request: Request, response: Response): Promise<Response> {
     const { description, category } = request.body;
 
-    this.createServiceService.execute({ description, category })
+    const service = await this.createServiceService.execute({
+      description,
+      category
+    });
 
-    return response.status(201).send();
+    return response.status(201).json(service);
   }
 
 }
