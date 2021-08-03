@@ -10,7 +10,7 @@ class DeleteUserController {
   }
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const { id } = request.query;
+    const { id } = request.params;
     const all = await this.deleteUserService.execute(id.toString());
     return response.json(all);
   }

@@ -11,33 +11,34 @@
   "paths": {
     "/services": {
       "post": {
-        "tags": ["Service"],
+        "tags": [
+          "Service"
+        ],
         "summary": "Create a beauty service",
         "description": "Create a new beauty service",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "description": {
-                    "type": "string"
-                  },
-                  "category": {
-                    "type": "string"
-                  }
-                },
-                "example": {
-                  "description": "beauty service name sample",
-                  "category": "beauty service category name sample"
-                }
+                "$ref": "#definitions/CreateServiceDTO"
+              },
+              "example": {
+                "description": "beauty service name sample",
+                "category": "beauty service category name sample"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#definitions/ResultDTO[ServiceResponseDTO]"
+                }
+              }
+            }
           },
           "500": {
             "description": "Service already exists"
@@ -45,7 +46,9 @@
         }
       },
       "get": {
-        "tags": ["Service"],
+        "tags": [
+          "Service"
+        ],
         "summary": "List beauty services",
         "description": "List all beauty services",
         "responses": {
@@ -68,6 +71,283 @@
               }
             }
           }
+        }
+      }
+    },
+    "/services/{id}": {
+      "delete": {
+        "tags": [
+          "Service"
+        ],
+        "summary": "Delete a beauty service",
+        "description": "Delete a beauty service by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted"
+          },
+          "500": {
+            "description": "Error when deleting service"
+          }
+        }
+      }
+    },
+    "/services/category?category=value": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "summary": "List beauty services by category",
+        "description": "List beauty services by category",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "category",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#definitions/ResultDTO[ServiceResponseDTO]"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error when fetching services"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a user",
+        "description": "Create a new singu user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#definitions/CreateUserDTO"
+              },
+              "example": {
+                "name": "singu user name sample",
+                "email": "user@singu.com.br",
+                "address": "Rua Coisada, 190 - São Paulo SP",
+                "password": "mysecretpass",
+                "bornDate": "2021-03-08"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#definitions/ResultDTO[UserResponseDTO]"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "User already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List users",
+        "description": "List all singu users",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "bornDate": {
+                      "type": "date"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete a user",
+        "description": "Delete a singu user by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted"
+          },
+          "500": {
+            "description": "Error when deleting user"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateServiceDTO": {
+      "type": "object",
+      "required": true,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        }
+      }
+    },
+    "ResultDTO[ServiceResponseDTO]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "data": {
+          "$ref": "#definitions/ServiceResponseDTO"
+        }
+      }
+    },
+    "ServiceResponseDTO": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "_v": {
+          "type": "int32"
+        }
+      }
+    },
+    "CreateUserDTO": {
+      "type": "object",
+      "required": true,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "bornDate": {
+          "type": "date"
+        }
+      }
+    },
+    "ResultDTO[UserResponseDTO]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "data": {
+          "$ref": "#definitions/UserResponseDTO"
+        }
+      }
+    },
+    "UserResponseDTO": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "bornDate": {
+          "type": "date"
+        },
+        "_v": {
+          "type": "int32"
         }
       }
     }

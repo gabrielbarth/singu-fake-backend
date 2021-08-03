@@ -13,6 +13,10 @@ class DeleteUserService implements IDeleteUserService {
 
   async execute(id: string): Promise<IResultDTO<boolean>> {
     const user = await this.servicesRepository.delete(id);
+
+    if(!user)
+      return ResultDTO.Error("User not found");
+
     return ResultDTO.Success(user);
   }
 

@@ -19,7 +19,7 @@ servicesRoutes.get("/category", (request, response) => {
   return listServiceByCategoryController.handle(request, response);
 });
 
-servicesRoutes.delete("/", (request, response) => {
+servicesRoutes.delete("/:id", (request, response) => {
   return deleteServiceController.handle(request, response);
 });
 

@@ -12,8 +12,12 @@ class DeleteServiceService implements IDeleteServiceService {
   }
 
   async execute(id: string): Promise<IResultDTO<boolean>> {
-    const services = await this.servicesRepository.delete(id);
-    return ResultDTO.Success(services);
+    const service = await this.servicesRepository.delete(id);
+
+    if(!service)
+      return ResultDTO.Error("Service not found");
+
+    return ResultDTO.Success(service);
   }
 
 }

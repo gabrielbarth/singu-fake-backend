@@ -14,7 +14,7 @@ usersRoutes.get("/", (request, response) => {
   return listUserController.handle(request, response);
 });
 
-usersRoutes.delete("/", (request, response) => {
+usersRoutes.delete("/:id", (request, response) => {
   return deleteUserController.handle(request, response);
 });
 
