@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "production": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules  -r dotenv/config --respawn dist/server.js",
+    "production": "node -r dotenv/config dist/server.js",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules  -r dotenv/config --respawn src/server.ts"
   },
   "dependencies": {
