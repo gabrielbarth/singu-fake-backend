@@ -4,6 +4,8 @@ import { mongoose } from '../../../../config/databaseConnection';
 interface IService extends mongoose.Document {
   description: string;
   category: string;
+  observation: string;
+  imageUrl: string;
 }
 
 const ServiceSchema: mongoose.Schema = new mongoose.Schema({
@@ -19,9 +21,19 @@ const ServiceSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     require: true
   },
-
+  observation: {
+    type: String,
+    require: true
+  },
+  imageUrl: {
+    type: String,
+    require: false
+  }
 });
 
 const ServiceModel = mongoose.model<IService>('Service', ServiceSchema);
+
+
+
 
 export { IService, ServiceModel };

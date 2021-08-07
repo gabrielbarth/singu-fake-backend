@@ -10,11 +10,13 @@ class CreateServiceController {
   }
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const { description, category } = request.body;
+    const { description, category, observation, imageUrl } = request.body;
 
     const service = await this.createServiceService.execute({
       description,
-      category
+      category,
+      observation,
+      imageUrl
     });
 
     return response.status(201).json(service);

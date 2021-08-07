@@ -24,7 +24,9 @@
               },
               "example": {
                 "description": "beauty service name sample",
-                "category": "beauty service category name sample"
+                "category": "beauty service category name sample",
+                "observation": "beauty service observation sample",
+                "imageUrl": "https://myimageserver.com/myservice.png"
               }
             }
           }
@@ -65,6 +67,12 @@
                     },
                     "category": {
                       "type": "string"
+                    },
+                    "observation": {
+                        "type": "string"
+                    },
+                    "iamgeUrl": {
+                        "type": "string"
                     }
                   }
                 }
@@ -250,6 +258,12 @@
         },
         "category": {
           "type": "string"
+        },
+        "observation": {
+            "type": "string"
+        },
+        "iamgeUrl": {
+            "type": "string"
         }
       }
     },

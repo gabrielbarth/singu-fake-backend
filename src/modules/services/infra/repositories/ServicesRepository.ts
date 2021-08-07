@@ -12,10 +12,12 @@ class ServicesRepository implements IServicesRepository {
     return ServicesRepository.INSTANCE;
   }
 
-  async create({ description, category }: ICreateServiceDTO): Promise<IService> {
+  async create({ description, category, observation, imageUrl }: ICreateServiceDTO): Promise<IService> {
     const service = await ServiceModel.create({
       description,
-      category
+      category,
+      observation,
+      imageUrl
     });
 
     return service;
@@ -37,7 +39,7 @@ class ServicesRepository implements IServicesRepository {
   }
 
 
-  async delete(id: string): Promise<boolean>{
+  async delete(id: string): Promise<boolean> {
     const service = await ServiceModel.deleteOne({ _id: id });
     return service.deletedCount > 0;
   }

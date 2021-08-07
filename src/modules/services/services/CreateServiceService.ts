@@ -8,6 +8,8 @@ import { IResultDTO } from '../../../utils/result/IResultDTO';
 interface IRequest {
   description: string;
   category: string;
+  observation: string;
+  imageUrl: string;
 }
 
 class CreateServiceService implements ICreateServiceService {
@@ -17,7 +19,7 @@ class CreateServiceService implements ICreateServiceService {
     this.servicesRepository = servicesRepository;
   }
 
-  async execute({ description, category }: IRequest): Promise<IResultDTO<IService>> {
+  async execute({ description, category, observation, imageUrl }: IRequest): Promise<IResultDTO<IService>> {
     const serviceAlreadyExists = await this.servicesRepository.findByDescription(description);
 
     if (serviceAlreadyExists)
@@ -25,7 +27,9 @@ class CreateServiceService implements ICreateServiceService {
 
     const newService = await this.servicesRepository.create({
       description,
-      category
+      category,
+      observation,
+      imageUrl
     });
 
     return ResultDTO.Success(newService);
