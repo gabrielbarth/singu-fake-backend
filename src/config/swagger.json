@@ -71,7 +71,7 @@
                     "observation": {
                         "type": "string"
                     },
-                    "iamgeUrl": {
+                    "imageUrl": {
                         "type": "string"
                     }
                   }
@@ -262,7 +262,7 @@
         "observation": {
             "type": "string"
         },
-        "iamgeUrl": {
+        "imageUrl": {
             "type": "string"
         }
       }
@@ -295,6 +295,12 @@
         },
         "category": {
           "type": "string"
+        },
+        "observation": {
+            "type": "string"
+        },
+        "imageUrl": {
+            "type": "string"
         },
         "_v": {
           "type": "int32"
